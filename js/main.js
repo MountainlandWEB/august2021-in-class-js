@@ -190,3 +190,62 @@ function displayGreeting() {
   const greeting = getGreeting(time);
   document.getElementById('greeting').innerText = greeting;
 }
+
+function displayResult() {
+  const numbers1 = document.getElementById('array1').value;
+  const numbers2 = document.getElementById('array2').value;
+
+  const array1 = numbers1.split(',');
+  const array2 = numbers2.split(',');
+
+  array1.forEach(function (number, index) {
+    array1[index] = +number;
+  });
+
+  array2.forEach(function (number, index) {
+    array2[index] = +number;
+  });
+
+  const resultArray = multiplyArrays(array1, array2);
+
+  document.getElementById('resultArray').innerText = resultArray;
+}
+
+function multiplyArrays(a1, a2) {
+  if (a1.length == a2.length) {
+    const resultArray = [];
+    for (let i = 0; i < a1.length; i++) {
+      const number1 = a1[i];
+      const number2 = a2[i];
+      resultArray.push(number1 * number2);
+    }
+    return resultArray;
+  }
+  return 'Arrays are of different length';
+}
+
+function multiplyMatrices(matrixA, matrixB) {
+  const resultMatrix = [[], []];
+
+  // dot product
+
+  resultMatrix[0][0] = matrixA[0][0] * matrixB[0][0] + matrixA[0][1] * matrixB[1][0];
+  resultMatrix[0][1] = matrixA[0][0] * matrixB[0][1] + matrixA[0][1] * matrixB[1][1];
+  resultMatrix[1][0] = matrixA[1][0] * matrixB[0][0] + matrixA[1][1] * matrixB[1][0];
+  resultMatrix[1][1] = matrixA[1][0] * matrixB[0][1] + matrixA[1][1] * matrixB[1][1];
+
+  return resultMatrix;
+}
+
+console.log(
+  multiplyMatrices(
+    [
+      [1, 2],
+      [3, 4],
+    ],
+    [
+      [5, 6],
+      [7, 8],
+    ]
+  )
+);
