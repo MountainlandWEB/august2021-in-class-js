@@ -13,6 +13,8 @@ chats.push(currentChat);
 render();
 
 function render() {
+  // chat name
+  document.getElementById('current-chat-name').innerText = currentChat.name;
   // chats
   let chatHtml = '<ul class="list-group">';
   chats.forEach((chat) => {
@@ -46,5 +48,7 @@ function render() {
 }
 
 function addNewMessage(username) {
-    
+  const content = document.getElementById(username).value;
+  currentChat.addMessage(new Message(content, username));
+  render();
 }
