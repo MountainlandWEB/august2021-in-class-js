@@ -229,10 +229,14 @@ function multiplyMatrices(matrixA, matrixB) {
 
   // dot product
 
-  resultMatrix[0][0] = matrixA[0][0] * matrixB[0][0] + matrixA[0][1] * matrixB[1][0];
-  resultMatrix[0][1] = matrixA[0][0] * matrixB[0][1] + matrixA[0][1] * matrixB[1][1];
-  resultMatrix[1][0] = matrixA[1][0] * matrixB[0][0] + matrixA[1][1] * matrixB[1][0];
-  resultMatrix[1][1] = matrixA[1][0] * matrixB[0][1] + matrixA[1][1] * matrixB[1][1];
+  resultMatrix[0][0] =
+    matrixA[0][0] * matrixB[0][0] + matrixA[0][1] * matrixB[1][0];
+  resultMatrix[0][1] =
+    matrixA[0][0] * matrixB[0][1] + matrixA[0][1] * matrixB[1][1];
+  resultMatrix[1][0] =
+    matrixA[1][0] * matrixB[0][0] + matrixA[1][1] * matrixB[1][0];
+  resultMatrix[1][1] =
+    matrixA[1][0] * matrixB[0][1] + matrixA[1][1] * matrixB[1][1];
 
   return resultMatrix;
 }
@@ -249,3 +253,226 @@ console.log(
     ]
   )
 );
+
+/**
+ *
+ * Functions
+ *
+ */
+
+function findLongestString(...strings) {
+  let longestString = '';
+
+  strings.forEach((string) => {
+    if (string.length > longestString.length) {
+      longestString = string;
+    }
+  });
+
+  return longestString;
+}
+
+console.log(findLongestString('hi', 'yumyum', 'dream', 'big', 'dreams'));
+
+function findLongestStrings(...strings) {
+  let longestStrings = [];
+  let greatestLength = '';
+
+  strings.forEach((string) => {
+    if (string.length > greatestLength) {
+      greatestLength = string.length;
+    }
+  });
+  strings.forEach((string) => {
+    if (string.length == greatestLength) {
+      longestStrings.push(string);
+    }
+  });
+
+  return longestStrings;
+}
+
+console.log(findLongestStrings('hi', 'yumyum', 'dream', 'big', 'dreams'));
+
+function execute(fn, a) {
+  return fn(a);
+}
+
+console.log(
+  execute(function (a) {
+    return a * 5;
+  }, 20)
+);
+
+/**
+ *
+ * Recursion
+ *
+ */
+
+// Write a function fib(n) that a takes an integer n and returns the nth fibonacci number
+
+function fib(n) {
+  // base case
+  if (n == 0) {
+    return 0;
+  }
+
+  if (n == 1) {
+    return 1;
+  }
+
+  // call to itself
+  return fib(n - 1) + fib(n - 2);
+}
+
+/**
+ *
+ * OOP
+ *
+ */
+
+function Engine(horsePower, cylinderCount, isTurbo = false) {
+  this.horsePower = horsePower;
+  this.cylinderCount = cylinderCount;
+  this.isTurbo = isTurbo;
+}
+
+function Car(make, model, year, engine) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.engine = engine;
+}
+
+let v6turbo = new Engine(350, 6, true);
+let myCar = new Car('nissan', 'GT-R', 2015, v6turbo);
+
+// in-class exercise is to create these two constructor functions
+
+// class ToDoList
+// id: string || number
+// name: string
+// toDos: array
+// addToDo: fn
+// removeToDo: fn
+// clearCompleted: fn
+
+class ToDoList {
+  constructor(id, name, toDos = []) {
+    this.id = id;
+    this.name = name;
+    this.toDos = toDos;
+  }
+
+  addToDo(toDo) {
+    this.toDos.push(toDo);
+  }
+
+  removeToDo(id) {
+    this.toDos = this.toDos.filter((toDo) => toDo.id != id);
+  }
+
+  clearCompleted() {
+    this.toDos = this.toDos.filter((toDo) => !toDo.completed);
+  }
+
+  static getNewId() {
+    return `list-${Math.random() * 4000}-${Math.random() * 5000}`;
+  }
+}
+
+// class ToDo
+// id: string || number
+// description: string
+// completed: boolean
+// setCompleted(completed): fn
+
+class ToDo {
+  constructor(id, description, completed = false) {
+    this.id = id;
+    this.description = description;
+    this.completed = completed;
+  }
+}
+
+const lists = [];
+let toDoList = new ToDoList(1, 'shopping', [
+  new ToDo(1, 'bananas', true),
+  new ToDo(2, 'eggs'),
+]);
+lists.push(toDoList);
+
+class Rectangle {
+  constructor(id) {
+    this._id = id;
+  }
+
+  get area() {
+    return this.calcArea();
+  }
+
+  set area(number) {
+    if (number > 0) {
+      this._area = number;
+    }
+  }
+
+  calcArea() {
+    return this.height * this.width;
+  }
+}
+
+let square = new Rectangle();
+
+let area = square.area;
+
+square.area = 45;
+
+function doSomething(params) {
+  this.hi = hello;
+  console.log(this.document);
+}
+
+doSomething();
+
+let someObject = {
+  hi: 'hello',
+  doSomethingElse: function () {
+    this.hi = 'hello again';
+    console.log(this.document);
+    document.getElementById('sdf');
+    console.log(this.hi);
+  },
+};
+
+someObject.doSomethingElse();
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  static distance(a, b) {
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+    return Math.hypot(dx, dy);
+  }
+}
+
+const p1 = new Point(5, 5);
+const p2 = new Point(10, 10);
+
+console.log(Point.distance(p1, p2));
+
+
+class Util {
+  static newGuid(pre) {
+    return `${pre}-${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+  }
+}

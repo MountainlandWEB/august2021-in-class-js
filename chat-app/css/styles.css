@@ -1,0 +1,9 @@
+.chat-window {
+  display: flex;
+  height: 500px;
+  border: 1px solid gray;
+}
+
+.flex {
+  display: flex;
+}
