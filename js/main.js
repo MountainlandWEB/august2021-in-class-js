@@ -465,14 +465,37 @@ const p2 = new Point(10, 10);
 
 console.log(Point.distance(p1, p2));
 
-
 class Util {
   static newGuid(pre) {
     return `${pre}-${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
-      function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16)
-          .substring(1);
-      }
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
   }
 }
+
+let obj = {
+  number: 234,
+  string: 'some string',
+  object: {
+    hi: 'hello',
+  },
+  array: [0, 4, 2],
+  array2: ['a', 'b'],
+  boolean: true,
+};
+
+let stringObj = JSON.stringify(obj);
+
+localStorage.setItem('obj', stringObj);
+
+let retrievedObject = localStorage.getItem('obj');
+
+let parsedObject = JSON.parse(retrievedObject);
+
+
+
+console.log(retrievedObject);
+console.log(parsedObject);

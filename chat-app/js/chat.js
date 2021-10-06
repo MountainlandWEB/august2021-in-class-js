@@ -1,6 +1,6 @@
 class Chat {
-  constructor(name, messages = []) {
-    this.id = Util.newGuid('chat');
+  constructor(name, messages = [], id = Util.newGuid('chat')) {
+    this.id = id;
     this.name = name;
     this.messages = messages;
   }

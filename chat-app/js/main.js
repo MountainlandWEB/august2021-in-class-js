@@ -1,16 +1,28 @@
+const CHATS = 'chats';
+
+const existingChats = retrieve();
 const user1 = new User('crazyWaffles');
 const user2 = new User('fresh4days');
-
-const chats = [];
+let chats = [];
+let currentChat;
 const users = [user1, user2];
 
-let currentChat = new Chat('PoGo');
-currentChat.addMessage(new Message('Hi!', user1.username));
-currentChat.addMessage(new Message('Hello!', user2.username));
+if (!existingChats) {
+  currentChat = new Chat('PoGo');
+  currentChat.addMessage(new Message('Hi!', user1.username));
+  currentChat.addMessage(new Message('Hello!', user2.username));
 
-chats.push(currentChat);
+  chats.push(
+    currentChat,
+    new Chat('School', [new Message("What's up?", user1.username)])
+  );
+} else {
+  chats = existingChats;
+  currentChat = chats[0];
+}
 
 render();
+save();
 
 function render() {
   // chat name
@@ -51,4 +63,27 @@ function addNewMessage(username) {
   const content = document.getElementById(username).value;
   currentChat.addMessage(new Message(content, username));
   render();
+  save();
+}
+
+function save() {
+  const chatsString = JSON.stringify(chats);
+  localStorage.setItem(CHATS, chatsString);
+}
+
+function retrieve() {
+  const chatsString = localStorage.getItem(CHATS);
+  const chatsObject = JSON.parse(chatsString);
+
+  if (chatsObject) {
+    const typedObjects = chatsObject.map((chat) => {
+      let typedMessages = chat.messages.map(
+        (message) => new Message(message.content, message.user)
+      );
+      let typedChat = new Chat(chat.name, typedMessages);
+      return typedChat;
+    });
+
+    return typedObjects;
+  }
 }
