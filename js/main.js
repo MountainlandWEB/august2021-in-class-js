@@ -495,7 +495,81 @@ let retrievedObject = localStorage.getItem('obj');
 
 let parsedObject = JSON.parse(retrievedObject);
 
-
-
 console.log(retrievedObject);
 console.log(parsedObject);
+
+/**
+ *
+ * Async
+ *
+ */
+
+function capAsync(anArray, callback) {
+  setTimeout(function () {
+    callback(anArray.toString().toUpperCase().split(','));
+  }, Math.random() * 2000 + 1000);
+}
+
+const array = ['dream', 'big', 'dreams'];
+
+let newCoolStr = capAsync(array, handleModifiedArray); //not what you think will happen
+
+function handleModifiedArray(modifiedArrayStr) {
+  document.getElementById('array3').innerText = modifiedArrayStr;
+}
+
+function capAsyncPromise(anArray) {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const newArray = anArray.toString().toUpperCase().split(',');
+      resolve(newArray);
+    }, Math.random() * 2000 + 1000);
+  });
+  return promise;
+}
+
+let promise = capAsyncPromise(array);
+
+promise.then((modifiedArray) => {
+  document.getElementById('array5').innerText = modifiedArray;
+});
+
+// write an async function that takes an array and a function and it will
+// call that function with the array having capitalized the first letter
+// of every string in the array
+
+function capFirstLetterAsync(anArray, callback) {
+  setTimeout(() => {
+    const newArray = anArray.map(
+      (string) => string[0].toUpperCase() + string.substring(1)
+    );
+    callback(newArray);
+  }, Math.random() * 2000 + 1000);
+}
+
+capFirstLetterAsync(
+  array,
+  (modifiedArray) =>
+    (document.getElementById('array4').innerText = modifiedArray)
+);
+
+// take the function above and change it over to use
+// a Promise instead
+
+function capFirstLetterAsyncPromise(anArray) {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const newArray = anArray.map(
+        (string) => string[0].toUpperCase() + string.substring(1)
+      );
+      resolve(newArray);
+    }, Math.random() * 2000 + 1000);
+  });
+  return promise;
+}
+
+let promise2 = capFirstLetterAsyncPromise(array);
+
+promise2.then((modifiedArray) => {
+  document.getElementById('array6').innerText = modifiedArray;
+});
