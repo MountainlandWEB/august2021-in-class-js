@@ -39,3 +39,17 @@ function hitMe(playerId) {
     });
   });
 }
+
+// what is the big O of this?
+function printTwice(array) {
+  for (let i = 0; i < array.length; i++) {
+    console.log(i);
+  }
+  for (let j = 0; j < array.length; j++) {
+    console.log(j);
+  }
+
+  console.log(array[0]);
+}
+
+

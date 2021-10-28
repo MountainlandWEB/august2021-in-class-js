@@ -573,3 +573,29 @@ let promise2 = capFirstLetterAsyncPromise(array);
 promise2.then((modifiedArray) => {
   document.getElementById('array6').innerText = modifiedArray;
 });
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.size = 0;
+  }
+  /**
+   * {
+   *  key: number,
+   * }
+   */
+  insert(data) {}
+
+  remove(key) {}
+
+  contains(key) {}
+
+  toString() {}
+}
+
+class LinkedListNode {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
+}
