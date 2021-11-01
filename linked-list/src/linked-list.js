@@ -25,7 +25,7 @@ class LinkedList {
       this.size += 1;
     }
   }
-  
+
   remove(key) {
     if (this.head) {
       if (this.head.data.key == key) {
